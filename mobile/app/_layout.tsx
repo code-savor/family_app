@@ -47,7 +47,13 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <StatusBar style="auto" backgroundColor="transparent" translucent />
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          animationDuration: 280,
+        }}
+      >
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(main)" />
