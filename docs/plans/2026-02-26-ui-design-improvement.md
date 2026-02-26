@@ -6,7 +6,7 @@
 
 **Architecture:** 기존 StyleSheet 컴포넌트는 유지하고, 리팩토링 시 NativeWind로 전환 (점진적). CSS 변수 기반 다크모드로 `dark:` prefix 최소화. Reanimated Layout Animations + withSpring 패턴으로 애니메이션 일관성 확보.
 
-**Tech Stack:** NativeWind v4, Tailwind CSS v3, react-native-reanimated v3, Expo SDK 54, React Native 0.81 (New Architecture 활성화)
+**Tech Stack:** NativeWind v4, Tailwind CSS v3, react-native-reanimated v4 (Expo SDK 54 + RN 0.81 호환 버전), Expo SDK 54, React Native 0.81 (New Architecture 활성화)
 
 ---
 
