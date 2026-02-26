@@ -20,7 +20,7 @@ interface ButtonProps {
 const VARIANT_STYLES = {
   primary: {
     container: 'bg-primary',
-    text: 'text-white',
+    text: 'text-text-on-primary',
   },
   secondary: {
     container: 'bg-surface-secondary border-2 border-primary',

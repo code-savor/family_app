@@ -6,6 +6,7 @@ import Animated, {
   withRepeat,
   withTiming,
   Easing,
+  cancelAnimation,
 } from 'react-native-reanimated';
 
 interface LoadingSpinnerProps {
@@ -21,6 +22,9 @@ export function LoadingSpinner({ size = 32, color = '#FF8C42' }: LoadingSpinnerP
       withTiming(360, { duration: 800, easing: Easing.linear }),
       -1,
     );
+    return () => {
+      cancelAnimation(rotation);
+    };
   }, [rotation]);
 
   const animatedStyle = useAnimatedStyle(() => ({

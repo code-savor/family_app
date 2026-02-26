@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, StyleSheet, Vibration } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Vibration, useColorScheme } from 'react-native';
 import { colors } from '@/theme';
 
 interface PinInputProps {
@@ -11,6 +11,9 @@ interface PinInputProps {
 const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '⌫'] as const;
 
 export function PinInput({ value, onChange, maxLength = 4 }: PinInputProps) {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
   const handleKey = useCallback((key: string) => {
     if (key === '⌫') {
       onChange(value.slice(0, -1));
@@ -37,7 +40,7 @@ export function PinInput({ value, onChange, maxLength = 4 }: PinInputProps) {
       {/* 키패드 */}
       <View style={styles.keypad}>
         {KEYS.map((key, idx) => (
-          <PinKey key={idx} label={key} onPress={handleKey} />
+          <PinKey key={idx} label={key} onPress={handleKey} isDark={isDark} />
         ))}
       </View>
     </View>
@@ -47,21 +50,32 @@ export function PinInput({ value, onChange, maxLength = 4 }: PinInputProps) {
 const PinKey = React.memo(function PinKey({
   label,
   onPress,
+  isDark,
 }: {
   label: string;
   onPress: (key: string) => void;
+  isDark: boolean;
 }) {
   const handlePress = useCallback(() => onPress(label), [label, onPress]);
+
+  const keyColors = {
+    key: isDark ? '#2C2C2C' : colors.surface,
+    keyBorder: isDark ? '#444444' : colors.border,
+    keyPressed: isDark ? '#3A3A3A' : colors.surfaceSecondary,
+  };
 
   if (!label) return <View style={styles.keyEmpty} />;
 
   return (
     <Pressable
-      style={({ pressed }) => [styles.key, pressed && styles.keyPressed]}
+      style={({ pressed }) => [
+        styles.key,
+        { backgroundColor: pressed ? keyColors.keyPressed : keyColors.key, borderColor: keyColors.keyBorder },
+      ]}
       onPress={handlePress}
       accessibilityLabel={label === '⌫' ? '지우기' : label}
     >
-      <Text className={`font-medium text-text-primary ${label === '⌫' ? 'text-xl' : 'text-2xl'}`}>
+      <Text className={`font-medium ${label === '⌫' ? 'text-xl text-text-secondary' : 'text-2xl text-text-primary'}`}>
         {label}
       </Text>
     </Pressable>
@@ -80,17 +94,12 @@ const styles = StyleSheet.create({
     width: 84,
     height: 64,
     borderRadius: 12,
-    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: colors.border,
     alignItems: 'center',
     justifyContent: 'center',
   },
   keyEmpty: {
     width: 84,
     height: 64,
-  },
-  keyPressed: {
-    backgroundColor: colors.surfaceSecondary,
   },
 });
