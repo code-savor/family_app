@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# 테스트
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 개발 도구
+.ruff_cache/
+.mypy_cache/
+
+# 데이터 (볼륨 마운트로 관리)
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# 환경변수
+.env
+.env.local
+
+# 기타
+.git/
+.gitignore
+*.md

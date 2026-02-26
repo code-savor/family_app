@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+*.egg
+
+# DB
+backend/data/
+*.db
+*.sqlite
+
+# Env
+.env
+.env.local
+
+# Node
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/.env
+mobile/.env.production
+
+# OS
+.DS_Store
